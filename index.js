@@ -34,7 +34,22 @@ It should be able to run in O(n) time, where n = total number of k-v pairs in al
 // returns a Map object whose keys match all the input map keys, 
 // and value holds a Set with all matching values for that key among all maps
 function mapCompatibleUnitsByPilot(pilotTests) {
-
+    const mapPilot = new Map();
+    for (let i = 0; i < pilotTests.length; i++) {
+        for (const [key, value] of pilotTests[i]) {
+            if (mapPilot.has(key)) {
+              const newValue = mapPilot.get(key);
+              newValue.add(value);
+              mapPilot.set(key, newValue);
+            }
+            else {
+              const newValue = new Set();
+              newValue.add(value);
+              mapPilot.set(key, newValue);
+            }
+        }
+    }
+    return mapPilot;
 }
 
 
@@ -65,7 +80,22 @@ It should also run in O(n) time, where n = total number of k-v pairs in all the 
 // returns a Map object whose keys match all the input map values, 
 // and values holds a Set with all matching keys for that value among all maps
 function mapCompatiblePilotsByUnit(pilotTests) {
-
+    const mapUnit = new Map();
+    for (let i = 0; i < pilotTests.length; i++) {
+        for (const [value, key] of pilotTests[i]) {
+            if (mapUnit.has(key)) {
+              const newValue = mapUnit.get(key);
+              newValue.add(value);
+              mapUnit.set(key, newValue);
+            }
+            else {
+              const newValue = new Set();
+              newValue.add(value);
+              mapUnit.set(key, newValue);
+            }
+        }
+    }
+    return mapUnit;
 }
 
 
